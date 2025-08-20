@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register | ChatApp</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #95BEDA 0%, #4A90E2 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .register-container {
+            background: #fff;
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 32px 28px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(74, 144, 226, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 {
+            text-align: center;
+            color: #4A90E2;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            align-self: center;
+            margin-bottom: 6px;
+            color: #333;
+            font-size: 15px;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 80%;
+            padding: 10px 12px;
+            margin-bottom: 18px;
+            border: 1px solid #95BEDA;
+            border-radius: 6px;
+            font-size: 15px;
+            background: #f7fafd;
+            transition: border-color 0.2s;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input:focus {
+            border-color: #4A90E2;
+            outline: none;
+        }
+        .submit-btn {
+            width: 80%;
+            background-color: #4A90E2;
+            color: #fff;
+            padding: 12px 0;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .submit-btn:hover {
+            background-color: #357ABD;
+        }
+        .login-link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #4A90E2;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .login-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Create Your ChatApp Account</h2>
+        <form action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            <label for="id_username">Username</label>
+            {{ form.username }}
+            <label for="id_email">Email</label>
+            {{ form.email }}
+            <label for="id_password">Password</label>
+            {{ form.password }}
+            <button type="submit" class="submit-btn">Sign Up</button>
+        </form>
+        <a href="{% url 'login' %}" class="login-link">Already have an account? Log in</a>
+    </div>

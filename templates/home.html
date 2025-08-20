@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home | ChatApp</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #95BEDA 0%, #4A90E2 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            width: 100%;
+            background: #4A90E2;
+            padding: 18px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            box-shadow: 0 2px 8px rgba(74, 144, 226, 0.10);
+        }
+        .navbar-title {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-left: 32px;
+        }
+        .logout-link {
+            color: #fff;
+            background: #357ABD;
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            margin-right: 32px;
+            transition: background 0.2s;
+        }
+        .logout-link:hover {
+            background: #2c5e8a;
+        }
+        .home-container {
+            background: #fff;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 36px 32px;
+            border-radius: 14px;
+            box-shadow: 0 8px 32px rgba(74, 144, 226, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hello-user {
+            font-size: 18px;
+            color: #4A90E2;
+            font-weight: 500;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+        .sections {
+            width: 100%;
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .section {
+            background: #f7fafd;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(74, 144, 226, 0.07);
+            padding: 28px 22px;
+            flex: 1 1 300px;
+            min-width: 260px;
+            max-width: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .section-title {
+            color: #4A90E2;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+        .chatroom-btn {
+            width: 90%;
+            background-color: #4A90E2;
+            color: #fff;
+            padding: 12px 0;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 10px;
+        }
+        .chatroom-btn:hover {
+            background-color: #357ABD;
+        }
+        .chatroom-list {
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #e0e8f3;
+            border-radius: 7px;
+            background: #fff;
+        }
+        .chatroom-list li {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e8f3;
+            color: #333;
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chatroom-list li:last-child {
+            border-bottom: none;
+        }
+        .online-count {
+            background: #4A90E2;
+            color: #fff;
+            border-radius: 12px;
+            padding: 2px 10px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+        .join-again-form {
+            display: inline;
+            margin-left: 12px;
+        }
+        .join-again-btn {
+            background-color: #357ABD;
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 6px 14px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .join-again-btn:hover {
+            background-color: #2c5e8a;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            padding: 6px 14px;
+            font-size: 13px;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: background 0.2s;
+        }
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+        .message-box {
+            width: 100%;
+            margin-bottom: 18px;
+        }
+        .message-success {
+            padding: 12px 18px;
+            border-radius: 7px;
+            margin-bottom: 8px;
+            font-size: 15px;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .message-warning {
+            padding: 12px 18px;
+            border-radius: 7px;
+            margin-bottom: 8px;
+            font-size: 15px;
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+    <span class="navbar-title">ChatApp</span>
+    
+    <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:14px; font-style:italic;">Welcome, <strong>{{ request.user.username }}</strong></span>
+        <a href="{% url 'logout' %}" class="logout-link">Logout</a>
+    </div>
+</div>
+    <div class="home-container">
+        {% if messages %}
+            <div class="message-box">
+                {% for message in messages %}
+                    <div class="message-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="hello-user">
+            Hello, {{ request.user.username }}!
+        </div>
+        <div class="sections">
+            <!-- Section 1: Join a new chatroom -->
+            <div class="section">
+                <div class="section-title">Join a New Chatroom</div>
+                <form action="{% url 'join_chatroom' %}" method="POST" style="width:100%;">
+                    {% csrf_token %}
+                    <input type="text" name="chatroom" placeholder="Enter chatroom name..." required
+                        style="width:90%;padding:10px 12px;margin-bottom:12px;border:1px solid #95BEDA;border-radius:6px;font-size:15px;background:#f7fafd;">
+                    <button type="submit" class="chatroom-btn">Join Chatroom</button>
+                </form>
+            </div>
+            <!-- Section 2: See my old chatrooms with online count, join again, and delete -->
+            <div class="section">
+                <div class="section-title">My Old Chatrooms</div>
+                <ul class="chatroom-list">
+                    {% for i in user_chatrooms %}
+                    <li>
+                        {{ i.name }}
+                        <span class="online-count">{{ i.online_count }} online</span>
+                        <form action="{% url 'join_again' i.id %}" method="GET" class="join-again-form">
+                            <input type="hidden" name="room" value="{{ i.name }}">
+                            <button type="submit" class="join-again-btn">Join Again</button>
+                        </form>
+                        {% if request.user == i.owner %}
+                        <form action="{% url 'delete' i.id %}" method="POST" class="join-again-form">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
