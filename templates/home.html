@@ -228,7 +228,7 @@
                     {% for i in user_chatrooms %}
                     <li>
                         {{ i.name }}
-                        <span class="online-count">{{ i.online_count }} online</span>
+                        
                         <form action="{% url 'join_again' i.id %}" method="GET" class="join-again-form">
                             <input type="hidden" name="room" value="{{ i.name }}">
                             <button type="submit" class="join-again-btn">Join Again</button>

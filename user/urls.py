@@ -10,5 +10,6 @@ urlpatterns = [
     path('chat/<str:room_name>/',views.chatroom,name='chatroom'),
     path('delete/<int:chat_id>/',views.delete,name='delete'),
     path('join/again/<int:roomID>/',views.join_again,name='join_again'),
+    path('',views.index,name='index'),
 
 ]

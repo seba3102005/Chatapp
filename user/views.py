@@ -6,6 +6,10 @@ from django.contrib import messages
 
 # Create your views here.
 
+def index(request):
+    return render(request,'index.html')
+
+
 def Register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -38,6 +42,7 @@ def login_view(request):
             return redirect('home') 
         else:
             print('Invalid credentials')
+            messages.warning(request,'Invalid Credentials')
             return render(request,'login.html')
         
         

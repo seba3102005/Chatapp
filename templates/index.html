@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome | ChatApp</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #95BEDA 0%, #4A90E2 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            width: 100%;
+            background: #4A90E2;
+            padding: 18px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            box-shadow: 0 2px 8px rgba(74, 144, 226, 0.10);
+        }
+        .navbar-title {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-left: 32px;
+        }
+        .nav-links {
+            margin-right: 32px;
+        }
+        .nav-btn {
+            color: #fff;
+            background: #357ABD;
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            margin-left: 10px;
+            transition: background 0.2s;
+        }
+        .nav-btn:hover {
+            background: #2c5e8a;
+        }
+        .hero {
+            max-width: 800px;
+            margin: 100px auto;
+            text-align: center;
+            color: #fff;
+        }
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .hero-btn {
+            background: #fff;
+            color: #4A90E2;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .hero-btn:hover {
+            background: #357ABD;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <span class="navbar-title">ChatApp</span>
+        <div class="nav-links">
+            <a href="{% url 'login' %}" class="nav-btn">Login</a>
+            <a href="{% url 'register' %}" class="nav-btn">Sign Up</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to ChatApp 👋</h1>
+        <p>
+            Connect instantly with friends, join chatrooms, and see who’s online in real time.<br>
+            Start chatting with just one click!
+        </p>
+        <a href="{% url 'register' %}" class="hero-btn">Get Started</a>
+    </div>
+</body>
+</html>

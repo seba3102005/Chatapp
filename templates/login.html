@@ -84,6 +84,15 @@
         .register-link:hover {
             text-decoration: underline;
         }
+        .message-warning {
+            padding: 12px 18px;
+            border-radius: 7px;
+            margin-bottom: 8px;
+            font-size: 15px;
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
     </style>
 </head>
 <body>
@@ -97,6 +106,15 @@
             <input type="password" name="password" id="password" required>
             <button type="submit" class="submit-btn">Login</button>
         </form>
+        {% if messages %}
+            <div class="message-box">
+                {% for message in messages %}
+                    <div class="message-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <a href="{% url 'register' %}" class="register-link">Don't have an account? Sign up</a>
     </div>
 </body>
