@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-m+1(hj__rg@*2-vxc8y^-8p32158%#!zh1gp3qq0zm&@chj-&n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['127.0.0.1', '.onrender.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -86,13 +86,10 @@ ASGI_APPLICATION = "core.asgi.application" # for websockets asynchronus
 
 import dj_database_url
 
+
 # Replace your existing DATABASES setting with this:
 DATABASES = {
-    'default': dj_database_url.config(
-        # The default is a local SQLite database for development
-        default='sqlite:///db.sqlite3',
-        conn_max_age=600
-    )
+     "default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))
 }
 
 # Password validation
@@ -129,7 +126,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# Static files
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
